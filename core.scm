@@ -22,3 +22,7 @@
  (vector _ X O X) ;   1
  (vector O O _ _) ;   2
  (vector O X O _));   3
+
+;; looks up cell's color by coordinates
+(define (coor->color world col row)
+  (vector-ref (list-ref world row) col))
