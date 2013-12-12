@@ -1,0 +1,112 @@
+#lang racket
+(require rackunit
+         "core.scm"
+         rackunit/text-ui)
+
+(define core-tests
+  (test-suite
+   "Tests for core.scm"
+   (check-equal?
+    (coor->color
+     (list (vector X X)
+           (vector O _))
+     ;; col:
+     0
+     ;; row:
+     1)
+    O)
+   (check-equal?
+    (swap-cells!
+     (list
+      (vector O O O _)
+      (vector _ X O X)
+      (vector O O _ _)
+      (vector O X O _))
+     '(1 1)  ;; row 1 - column 1 (starting from 0)
+     '(1 0)) ;; row 1 - column 0 (starting from 0)
+
+    ;; Input world with highlighted source and target cells:
+    ;; - source cell is marked with brackets []
+    ;; - target cell is marked with curly    {}
+    ;; (list
+    ;;  (vector  O   O  O _)
+    ;;  (vector {_} [X] O X)
+    ;;  (vector  O   O  _ _)
+    ;;  (vector  O   X  O _))
+
+    ;; Output world
+    (list
+     (vector O O O _)
+     (vector X _ O X)
+     (vector O O _ _)
+     (vector O X O _))
+    "move-cell tests")
+   (check-equal?
+    (minor? '(O O O O _ O O _) X)
+    #t
+    "")
+   (check-equal?
+    (minor? '(O O O O _ O O _) O)
+    #f
+    "")
+   (check-equal?
+    (get-neighbours-colors
+     (list
+      (vector O O O _)
+      (vector _ X O X)
+      (vector O O _ _)
+      (vector O X O _))
+     '(1 1))
+    ;; order: NW - N - NE - E - SE - S - SW - W
+    '(O O O O _ O O _)
+    "")
+   (check-equal?
+    (find-free-spaces
+     (list
+      (vector O O O _)
+      (vector _ X O X)
+      (vector O O _ _)
+      (vector O X O _))
+     '(1 1)
+     1)
+    ;; Central cell is marked with brackets []
+    ;; Free spaces with distance 1 are marked with curly {}
+    ;; (list
+    ;;  (vector  O   O   O  _)
+    ;;  (vector {_} [X]  O  X)
+    ;;  (vector  O   O  {_} _)
+    ;;  (vector  O   X   O  _))
+    ;; order: NW - N - NE - E - SE - S - SW - W
+    '((2 2) (1 0)))
+   (check-equal?
+    (find-nearby-cells
+     (list
+      (vector O O O _)
+      (vector _ X O X)
+      (vector O O _ _)
+      (vector O X O _))
+     '(1 1)
+     2)
+    ;; Central cell is marked with brackets []
+    ;; nearby cells with distance 1 are marked with curly {}
+    ;; (list
+    ;;  (vector {O} {O} {O} _)
+    ;;  (vector {_} [X] {O} X)
+    ;;  (vector {O} {O} {_} _)
+    ;;  (vector  O   X   O  _))
+    '((0 0) (0 1) (0 2) ;; upper row (including upper corners)
+                  (1 2) ;; right col (excluding right corners)
+      (2 0) (2 1) (2 2) ;; lower row (including lower corners)
+      (1 0)))           ;; right col (excluding right corners)
+   (check-equal?
+    (find-free-spaces
+     (list
+      (vector O O O _)
+      (vector _ X O X)
+      (vector O O _ _)
+      (vector O X O _))
+     '(1 1)
+     2)
+    '((0 3) (2 3) (3 3)))))
+
+(run-tests core-tests)
