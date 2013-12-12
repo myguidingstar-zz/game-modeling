@@ -47,3 +47,13 @@
 ;; returns true if the cell is minor
 (define (minor? neighbours color)
   "todo")
+
+;; exports symbols into a module that can be reused from other files
+(provide O X _
+         coor->color
+         symbol->color
+         swap-cells!
+         get-neighbours-colors
+         minor?
+         find-nearby-cells
+         find-free-spaces)
