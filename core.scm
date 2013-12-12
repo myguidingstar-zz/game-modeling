@@ -42,3 +42,8 @@
 ;; returns list of colors of the given cell's neighbors
 (define (get-neighbours-colors world central-cell)
   "todo")
+
+;; receives a cell's color and its neighbors' colors
+;; returns true if the cell is minor
+(define (minor? neighbours color)
+  "todo")
