@@ -26,3 +26,7 @@
 ;; looks up cell's color by coordinates
 (define (coor->color world col row)
   (vector-ref (list-ref world row) col))
+
+;; swaps two cells (swap their colours)
+(define (swap-cells! world source target)
+  "todo")
