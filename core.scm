@@ -34,3 +34,7 @@
 ;; returns list of all cells nearby the given cell with a specific distance
 (define (find-nearby-cells world central-cell distance)
   "todo")
+
+;; returns list of all free spaces (cells) nearby the given cell with a specific distance
+(define (find-free-spaces world central-cell distance)
+  "todo")
