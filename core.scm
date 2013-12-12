@@ -38,3 +38,7 @@
 ;; returns list of all free spaces (cells) nearby the given cell with a specific distance
 (define (find-free-spaces world central-cell distance)
   "todo")
+
+;; returns list of colors of the given cell's neighbors
+(define (get-neighbours-colors world central-cell)
+  "todo")
