@@ -7,3 +7,10 @@
 (define O 'O)
 (define X 'X)
 (define _ '_)
+
+(define (symbol->color sym)
+  (cond [(equal? 'O sym)
+         "red"]
+        [(equal? 'X sym)
+         "blue"]
+        [else "white"]))
