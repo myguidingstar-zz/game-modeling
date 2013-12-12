@@ -30,3 +30,7 @@
 ;; swaps two cells (swap their colours)
 (define (swap-cells! world source target)
   "todo")
+
+;; returns list of all cells nearby the given cell with a specific distance
+(define (find-nearby-cells world central-cell distance)
+  "todo")
