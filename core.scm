@@ -47,6 +47,27 @@
     (set-color! world  target source-color)))
 
 ;; returns list of all cells nearby the given cell with a specific distance
+;; the nearby cells may or may not be inside world.
+(define (find-nearby-cells-helper central-cell distance)
+  (let* ([col (first central-cell)]
+         [row (second central-cell)]
+
+         [top (- row distance)]
+         [bottom (+ row distance)]
+         [left (- col distance)]
+         [right (+ col distance)])
+    (append
+     (for/list ([i (in-range left (add1 right))])
+               (list i top))
+     (for/list ([i (in-range  (add1 top) bottom)])
+               (list right  i))
+     (for/list ([i (in-range left (add1 right))])
+               (list i bottom))
+     (for/list ([i (in-range  (add1 top) bottom)])
+               (list left  i)))))
+
+;; returns list of all cells nearby the given cell with a specific distance
+;; nearby cells must be inside world.
 (define (find-nearby-cells world central-cell distance)
   "todo")
 
@@ -82,5 +103,6 @@
          get-neighbors-colors
          colors->minority-index
          minor?
+         find-nearby-cells-helper
          find-nearby-cells
          find-free-spaces)
