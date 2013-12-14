@@ -90,7 +90,10 @@
 
 ;; returns list of colors of the given cell's neighbors
 (define (get-neighbors-colors world central-cell)
-  "todo")
+  (let ([neighbors (find-nearby-cells world central-cell 1)])
+    (map (lambda (cell-coor)
+           (coor->color world cell-coor))
+         neighbors)))
 
 (define (colors->minority-index neighbors-colors cell-color)
   (let* ([non-empty-neighbors
