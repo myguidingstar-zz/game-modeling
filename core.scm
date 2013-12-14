@@ -67,6 +67,7 @@
 (provide O X _
          coor->color
          symbol->color
+         set-color!
          swap-cells!
          get-neighbours-colors
          minor?
