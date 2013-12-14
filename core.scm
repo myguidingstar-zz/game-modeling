@@ -76,8 +76,8 @@
     (filter (lambda [cell-coor]
               (let ([col (first cell-coor)]
                     [row (second cell-coor)])
-                (and (<= 0 col world-right)
-                     (<= 0 row world-bottom))))
+                (and (< -1 col world-right)
+                     (< -1 row world-bottom))))
             all-nearby-cells)))
 
 ;; returns list of all free spaces (cells) nearby the given cell with a specific distance

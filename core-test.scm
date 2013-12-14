@@ -74,6 +74,17 @@
     ;; order: NW - N - NE - E - SW - S - SE - W
     '(O O O O O O _ _)
     "get-neighbors-colors test")
+
+   '(check-equal?
+    (get-neighbors-colors
+     (list
+      (vector O O )
+      (vector _ X ))
+     '(1 0))
+    ;; order: NW - N - NE - E - SW - S - SE - W
+    '(O _ X O O)
+    "get-neighbors-colors test")
+
    (check-equal?
     (find-free-spaces
      (list
@@ -121,6 +132,14 @@
       (-1  3) (0  3) (1  3) (2  3) (3  3)
       (-1  0) (-1 1) (-1 2))
     "find-nearby-cells-helper with distance 2 test")
+
+   (check-equal?
+    (find-nearby-cells
+     (list (vector O X)
+           (vector X X))
+     '(1 0)
+     1)
+    '((0 1) (1 1) (0 0)))
 
    (check-equal?
     (find-nearby-cells
