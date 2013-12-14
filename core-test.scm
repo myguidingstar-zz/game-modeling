@@ -168,6 +168,17 @@
       (2 1)             ;; right col (excluding right corners)
       (0 2) (1 2) (2 2) ;; lower row (including lower corners)
       (0 1))            ;; right col (excluding right corners)
-    "find-nearby-cells test")))
+    "find-nearby-cells test")
+
+   (check-equal?
+    (most-minor-cells
+     (list
+      (vector O X O O O)
+      (vector O X O O O)
+      (vector O X O O O)
+      (vector O X X X X)
+      (vector O O O O O)))
+    '((1 0) (1 1) (1 3) (3 3) (4 3)))
+   "most-minor-cells test"))
 
 (run-tests core-tests)

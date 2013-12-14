@@ -115,6 +115,27 @@
    ([row (in-range (length world))]
     [col (in-range (vector-length (first world)))])
    (list col row)))
+
+(define (most-minor-cells world)
+  (let* ([cells (all-cells world)]
+         [minority-indexes
+          (map (lambda [coor]
+                 (list
+                  coor
+                  (colors->minority-index
+                   (get-neighbors-colors world coor)
+                   (coor->color world coor))))
+               cells)]
+         [lowest-minority-index
+          (apply min (map second minority-indexes))])
+    (map first
+         (filter (lambda [entry]
+                   (let ([coor (first entry)]
+                         [minority-index (second entry)])
+                     (= lowest-minority-index
+                        minority-index)))
+                 minority-indexes))))
+
 ;; exports symbols into a module that can be reused from other files
 (provide O X _
          coor->color
@@ -125,6 +146,7 @@
          colors->minority-index
          all-cells
          minor?
+         most-minor-cells
          find-nearby-cells-helper
          find-nearby-cells
          find-free-spaces)
