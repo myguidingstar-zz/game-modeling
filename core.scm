@@ -70,7 +70,8 @@
 ;; receives a cell's color and its neighbors' colors
 ;; returns true if the cell is minor
 (define (minor? neighbors-colors cell-color)
-  "todo")
+  (< (colors->minority-index neighbors-colors cell-color)
+     0.4))
 
 ;; exports symbols into a module that can be reused from other files
 (provide O X _

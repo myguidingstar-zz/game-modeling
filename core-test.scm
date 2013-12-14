@@ -58,11 +58,11 @@
    (check-equal?
     (minor? '(O O O O _ O O _) X)
     #t
-    "")
+    "minor? return #t test")
    (check-equal?
     (minor? '(O O O O _ O O _) O)
     #f
-    "")
+    "minor? return #f test")
    (check-equal?
     (get-neighbors-colors
      (list
