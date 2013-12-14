@@ -19,10 +19,10 @@
   (send dc draw-rectangle x y cell-size cell-size))
 
 (define (draw-world world)
-  (let ((row-num (length world))
-        (col-num (vector-length (first world))))
-    (for* ([row (in-range row-num)]
-           [col (in-range col-num)])
+  (let ([n-of-rows (length world)]
+        [n-of-cols (vector-length (first world))])
+    (for* ([row (in-range n-of-rows)]
+           [col (in-range n-of-cols)])
           (draw-cell (symbol->color
                       (coor->color world col row))
                      (* cell-size col)
