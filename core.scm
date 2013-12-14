@@ -58,6 +58,15 @@
 (define (get-neighbors-colors world central-cell)
   "todo")
 
+(define (colors->minority-index neighbors-colors cell-color)
+  (let* ([non-empty-neighbors
+         (filter-not (lambda [x] (equal? _ x))
+                     neighbors-colors)]
+        [same-color-neighbors
+         (filter (lambda [x] (equal? cell-color x))
+                 neighbors-colors)]
+        [total (add1 (length non-empty-neighbors))])
+    (/ (add1 (length same-color-neighbors)) total)))
 ;; receives a cell's color and its neighbors' colors
 ;; returns true if the cell is minor
 (define (minor? neighbors-colors cell-color)
@@ -70,6 +79,7 @@
          set-color!
          swap-cells!
          get-neighbors-colors
+         colors->minority-index
          minor?
          find-nearby-cells
          find-free-spaces)

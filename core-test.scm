@@ -52,6 +52,10 @@
      (vector O X O _))
     "swap-cells! tests")
    (check-equal?
+    (colors->minority-index '(O O O O _ O O _) X)
+    1/7
+    "colors->minority-index test")
+   (check-equal?
     (minor? '(O O O O _ O O _) X)
     #t
     "")
