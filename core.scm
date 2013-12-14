@@ -33,6 +33,12 @@
         [row (second cell-coor)])
     (vector-ref (list-ref world row) col)))
 
+;; set color for a specific cell
+(define (set-color! world cell-coor color)
+  (let ([col (first cell-coor)]
+        [row (second cell-coor)])
+    (vector-set! (list-ref world row) col color)))
+
 ;; swaps two cells (swap their colours)
 (define (swap-cells! world source target)
   "todo")
