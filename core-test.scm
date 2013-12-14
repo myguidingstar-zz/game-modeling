@@ -10,20 +10,30 @@
     (coor->color
      (list (vector X X)
            (vector O _))
-     ;; col:
-     0
-     ;; row:
-     1)
+     '(0 1))
     O)
    (check-equal?
-    (swap-cells!
-     (list
-      (vector O O O _)
-      (vector _ X O X)
-      (vector O O _ _)
-      (vector O X O _))
-     '(1 1)  ;; row 1 - column 1 (starting from 0)
-     '(1 0)) ;; row 1 - column 0 (starting from 0)
+    (let ([world (list
+                  (vector O O O _)
+                  (vector _ X O X)
+                  (vector O O _ _)
+                  (vector O X O _))])
+      (set-color! world '(2 1) X)
+      world)
+    (list
+     (vector O O O _)
+     (vector _ X X X)
+     (vector O O _ _)
+     (vector O X O _))
+    "set-color! test")
+   (check-equal?
+    (let ([world (list
+                  (vector O O O _)
+                  (vector _ X O X)
+                  (vector O O _ _)
+                  (vector O X O _))])
+      (swap-cells! world '(1 1) '(0 1))
+      world)
 
     ;; Input world with highlighted source and target cells:
     ;; - source cell is marked with brackets []
@@ -40,7 +50,7 @@
      (vector X _ O X)
      (vector O O _ _)
      (vector O X O _))
-    "move-cell tests")
+    "swap-cells! tests")
    (check-equal?
     (minor? '(O O O O _ O O _) X)
     #t
