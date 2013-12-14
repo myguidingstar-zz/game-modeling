@@ -55,12 +55,12 @@
   "todo")
 
 ;; returns list of colors of the given cell's neighbors
-(define (get-neighbours-colors world central-cell)
+(define (get-neighbors-colors world central-cell)
   "todo")
 
 ;; receives a cell's color and its neighbors' colors
 ;; returns true if the cell is minor
-(define (minor? neighbours color)
+(define (minor? neighbors-colors cell-color)
   "todo")
 
 ;; exports symbols into a module that can be reused from other files
@@ -69,7 +69,7 @@
          symbol->color
          set-color!
          swap-cells!
-         get-neighbours-colors
+         get-neighbors-colors
          minor?
          find-nearby-cells
          find-free-spaces)

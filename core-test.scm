@@ -60,7 +60,7 @@
     #f
     "")
    (check-equal?
-    (get-neighbours-colors
+    (get-neighbors-colors
      (list
       (vector O O O _)
       (vector _ X O X)
