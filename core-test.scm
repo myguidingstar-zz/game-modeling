@@ -87,7 +87,7 @@
     ;;  (vector  O   O  {_} _)
     ;;  (vector  O   X   O  _))
     ;; order: NW - N - NE - E - SE - S - SW - W
-    '((2 2) (1 0)))
+    '((2 2) (0 1)))
    (check-equal?
     (find-nearby-cells
      (list
@@ -104,10 +104,10 @@
     ;;  (vector {_} [X] {O} X)
     ;;  (vector {O} {O} {_} _)
     ;;  (vector  O   X   O  _))
-    '((0 0) (0 1) (0 2) ;; upper row (including upper corners)
-                  (1 2) ;; right col (excluding right corners)
-      (2 0) (2 1) (2 2) ;; lower row (including lower corners)
-      (1 0)))           ;; right col (excluding right corners)
+    '((0 0) (1 0) (2 0) ;; upper row (including upper corners)
+      (2 1)             ;; right col (excluding right corners)
+      (0 2) (1 2) (2 2) ;; lower row (including lower corners)
+      (0 1)))           ;; right col (excluding right corners)
    (check-equal?
     (find-free-spaces
      (list
@@ -117,6 +117,6 @@
       (vector O X O _))
      '(1 1)
      2)
-    '((0 3) (2 3) (3 3)))))
+    '((3 0) (3 2) (3 3)))))
 
 (run-tests core-tests)
