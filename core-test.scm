@@ -142,6 +142,13 @@
     '((0 1) (1 1) (0 0)))
 
    (check-equal?
+    (all-cells
+     (list (vector O X)
+           (vector O X)))
+    '((0 0) (1 0) (0 1) (1 1))
+    "all-cells test")
+
+   (check-equal?
     (find-nearby-cells
      (list
       (vector O O O _)

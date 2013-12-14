@@ -110,6 +110,11 @@
   (< (colors->minority-index neighbors-colors cell-color)
      0.4))
 
+(define (all-cells world)
+  (for*/list
+   ([row (in-range (length world))]
+    [col (in-range (vector-length (first world)))])
+   (list col row)))
 ;; exports symbols into a module that can be reused from other files
 (provide O X _
          coor->color
@@ -118,6 +123,7 @@
          swap-cells!
          get-neighbors-colors
          colors->minority-index
+         all-cells
          minor?
          find-nearby-cells-helper
          find-nearby-cells
