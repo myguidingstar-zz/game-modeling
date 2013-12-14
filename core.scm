@@ -69,7 +69,16 @@
 ;; returns list of all cells nearby the given cell with a specific distance
 ;; nearby cells must be inside world.
 (define (find-nearby-cells world central-cell distance)
-  "todo")
+  (let ([all-nearby-cells
+         (find-nearby-cells-helper central-cell distance)]
+        [world-right (vector-length (first world))]
+        [world-bottom (length world)])
+    (filter (lambda [cell-coor]
+              (let ([col (first cell-coor)]
+                    [row (second cell-coor)])
+                (and (<= 0 col world-right)
+                     (<= 0 row world-bottom))))
+            all-nearby-cells)))
 
 ;; returns list of all free spaces (cells) nearby the given cell with a specific distance
 (define (find-free-spaces world central-cell distance)

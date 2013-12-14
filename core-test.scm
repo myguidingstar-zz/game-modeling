@@ -128,7 +128,7 @@
       (vector O O _ _)
       (vector O X O _))
      '(1 1)
-     2)
+     1)
     ;; Central cell is marked with brackets []
     ;; nearby cells with distance 1 are marked with curly {}
     ;; (list
