@@ -28,8 +28,10 @@
  (vector O X O _));   3
 
 ;; looks up cell's color by coordinates
-(define (coor->color world col row)
-  (vector-ref (list-ref world row) col))
+(define (coor->color world cell-coor)
+  (let ([col (first cell-coor)]
+        [row (second cell-coor)])
+    (vector-ref (list-ref world row) col)))
 
 ;; swaps two cells (swap their colours)
 (define (swap-cells! world source target)
