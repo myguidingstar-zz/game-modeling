@@ -8,6 +8,10 @@
 (define X 'X)
 (define _ '_)
 
+;; creates an initial state for a new world
+(define (create-world n-of-Os n-of-Xs n-of-cols n-of-rows)
+  "todo")
+
 (define (symbol->color sym)
   (cond [(equal? 'O sym)
          "red"]
