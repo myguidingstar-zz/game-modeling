@@ -24,7 +24,7 @@
     (for* ([row (in-range n-of-rows)]
            [col (in-range n-of-cols)])
           (draw-cell (symbol->color
-                      (coor->color world col row))
+                      (coor->color world (list col row)))
                      (* cell-size col)
                      (* cell-size row)))))
 
