@@ -41,7 +41,10 @@
 
 ;; swaps two cells (swap their colours)
 (define (swap-cells! world source target)
-  "todo")
+  (let ([source-color (coor->color world source)]
+        [target-color (coor->color world target)])
+    (set-color! world  source target-color)
+    (set-color! world  target source-color)))
 
 ;; returns list of all cells nearby the given cell with a specific distance
 (define (find-nearby-cells world central-cell distance)
