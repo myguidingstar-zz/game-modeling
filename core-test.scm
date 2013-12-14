@@ -102,7 +102,7 @@
      '(1 1)
      2)
     '((3 0) (3 2) (3 3))
-    "find-free-spaces with distance 1 test")
+    "find-free-spaces with distance 2 test")
 
    (check-equal?
     (find-nearby-cells-helper '(1 1) 1)
