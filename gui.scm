@@ -28,6 +28,15 @@
                      (* cell-size col)
                      (* cell-size row)))))
 
+(define (change-world-once! world)
+  (let ([pair (decide-cells-to-swap* world)])
+    (if (void? pair)
+        #f
+        (let* ([source (first pair)]
+               [target (second pair)])
+          (swap-cells! world source target)
+          #t))))
+
 (new button% [parent frame]
      [label "Next 365 days"]
      ;; Callback for a button click:
