@@ -14,12 +14,24 @@
 
 ;; creates an initial state for a new world
 (define (create-world n-of-Os n-of-Xs n-of-cols n-of-rows)
-  (list
-   (vector O X O O O)
-   (vector O X _ O O)
-   (vector _ X O O O)
-   (vector O X X X _)
-   (vector O O O O O)))
+  (let* ([total-cells (* n-of-cols n-of-rows)]
+         [world
+          (for/list ([i (in-range n-of-rows)])
+                    (apply vector
+                           (make-list n-of-cols _)))])
+    (when (<= (+ n-of-Os n-of-Xs) total-cells)
+          (let loop ([agents (append
+                              (make-list n-of-Os O)
+                              (make-list n-of-Xs X))]
+                     [coors (all-cells world)])
+            (if (null? agents)
+                world
+                (let ([random-coor (random (length coors))])
+                  (set-color! world
+                              (list-ref coors random-coor)
+                              (first agents))
+                  (loop (rest agents)
+                        (but-ref coors random-coor))))))))
 
 (define (symbol->color sym)
   (cond [(equal? 'O sym)
@@ -189,6 +201,8 @@
 
 ;; exports symbols into a module that can be reused from other files
 (provide O X _
+         but-ref
+         create-world
          coor->color
          symbol->color
          random-member
