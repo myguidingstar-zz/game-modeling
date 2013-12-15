@@ -116,7 +116,7 @@
     [col (in-range (vector-length (first world)))])
    (list col row)))
 
-(define (most-minor-cells world)
+(define (most-minor-agents world)
   (let* ([cells (all-cells world)]
          [minority-indexes
           (map (lambda [coor]
@@ -153,7 +153,7 @@
          colors->minority-index
          all-cells
          minor?
-         most-minor-cells
+         most-minor-agents
          find-nearby-cells-helper
          find-nearby-cells
          find-free-spaces)

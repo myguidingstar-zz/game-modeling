@@ -171,7 +171,7 @@
     "find-nearby-cells test")
 
    (check-equal?
-    (most-minor-cells
+    (most-minor-agents
      (list
       (vector O X O O O)
       (vector O X O _ O)
@@ -179,6 +179,6 @@
       (vector _ X X X X)
       (vector O O O O O)))
     '((1 0) (1 1) (3 3) (4 3)))
-   "most-minor-cells test"))
+   "most-minor-agents test"))
 
 (run-tests core-tests)
