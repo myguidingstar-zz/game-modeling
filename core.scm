@@ -119,29 +119,24 @@
 (define (most-minor-agents world)
   (let* ([cells (all-cells world)]
          [minority-indexes
-          (map (lambda [coor]
-                 (let ([color (coor->color world coor)])
-                   (list
-                    coor
-                    (colors->minority-index
-                     (get-neighbors-colors world coor)
-                     color)
-                    color)))
-               cells)]
+          (for/list ([coor (in-list cells)]
+                     #:when (not (equal? _ (coor->color world coor))))
+                    (list
+                     coor
+                     (colors->minority-index
+                      (get-neighbors-colors world coor)
+                      (coor->color world coor))))]
          [lowest-minority-index
-          (apply min
-                 (map second
-                      (filter-not (lambda [entry]
-                                    (let ([color (third entry)])
-                                      (equal? _ color)))
-                                  minority-indexes)))])
-    (map first
-         (filter (lambda [entry]
-                   (let ([coor (first entry)]
-                         [minority-index (second entry)])
-                     (= lowest-minority-index
-                        minority-index)))
-                 minority-indexes))))
+          (apply min (map second minority-indexes))])
+    (if (>= 0.4 lowest-minority-index)
+     (map first
+          (filter (lambda [entry]
+                    (let ([coor (first entry)]
+                          [minority-index (second entry)])
+                      (= lowest-minority-index
+                         minority-index)))
+                  minority-indexes))
+     '())))
 
 ;; exports symbols into a module that can be reused from other files
 (provide O X _
