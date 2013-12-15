@@ -8,6 +8,10 @@
 (define X 'X)
 (define _ '_)
 
+(define (but-ref coll index)
+  (append (take coll index)
+          (drop coll (add1 index))))
+
 ;; creates an initial state for a new world
 (define (create-world n-of-Os n-of-Xs n-of-cols n-of-rows)
   (list

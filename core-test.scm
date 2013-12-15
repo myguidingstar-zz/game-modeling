@@ -265,6 +265,11 @@ so that there is only one agent and one free space for that agent")
     (void)
     "decide-cells-to-swap* test. Sample world is chosen selectively
 so that there is only one agent but no free space for that agent")
+
+   (check-equal?
+    (but-ref  '(0 1 2 3 4) 3)
+    '(0 1 2 4)
+    "check-equal? test")
    ))
 
 (run-tests core-tests)
