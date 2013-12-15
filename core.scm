@@ -161,6 +161,21 @@
 (define (movable? world central-cell)
   (not (equal? #f (find-free-spaces-incrementally world central-cell 3))))
 
+;; returns list of two cells to swap
+;; if no suitable agent or free-space found, returns (void)
+;; Note: this function is impure because it chooses agents and
+;; free spaces randomly if there are more than one such suitable cells
+(define (decide-cells-to-swap* world)
+  (let ([agents (most-minor-agents world)])
+    (when (< 0 (length agents))
+          (let* ([agent-to-move
+                  (random-member agents)]
+                 [target-free-space
+                  (random-member (find-free-spaces-incrementally
+                                  world agent-to-move 3))])
+            (when target-free-space
+                  (list agent-to-move target-free-space))))))
+
 ;; exports symbols into a module that can be reused from other files
 (provide O X _
          coor->color
@@ -176,4 +191,5 @@
          find-nearby-cells-helper
          find-nearby-cells
          find-free-spaces
+         decide-cells-to-swap*
          find-free-spaces-incrementally)
