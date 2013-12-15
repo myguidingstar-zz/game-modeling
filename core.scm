@@ -10,7 +10,12 @@
 
 ;; creates an initial state for a new world
 (define (create-world n-of-Os n-of-Xs n-of-cols n-of-rows)
-  "todo")
+  (list
+   (vector O X O O O)
+   (vector O X _ O O)
+   (vector _ X O O O)
+   (vector O X X X _)
+   (vector O O O O O)))
 
 (define (symbol->color sym)
   (cond [(equal? 'O sym)
