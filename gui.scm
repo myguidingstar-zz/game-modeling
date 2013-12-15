@@ -44,20 +44,14 @@
            (sleep delay)
            (change-world-once! world)))
 
+(define initial-world
+  (create-world 400 400 300 300))
+
 (new button% [parent frame]
      [label "Next 365 days"]
      ;; Callback for a button click:
      [callback (lambda (button event)
-                 (draw-world
-                  (list
-                   (vector O X O O O)
-                   (vector O X _ X X)
-                   (vector O X _ _ X)
-                   (vector O X X X X)
-                   (vector O O O O O))))])
+                 (change-world! initial-world 365 1))])
 
 (send frame show #t)
 (sleep/yield 1)
-
-
-;; (draw-cell "blue" 0 0)
