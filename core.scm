@@ -123,7 +123,9 @@
   (let* ([cells (all-cells world)]
          [minority-indexes
           (for/list ([coor (in-list cells)]
-                     #:when (not (equal? _ (coor->color world coor))))
+                     #:when
+                     (and (movable? world coor)
+                          (not (equal? _ (coor->color world coor)))))
                     (list
                      coor
                      (colors->minority-index
@@ -132,14 +134,14 @@
          [lowest-minority-index
           (apply min (map second minority-indexes))])
     (if (>= 0.4 lowest-minority-index)
-     (map first
-          (filter (lambda [entry]
-                    (let ([coor (first entry)]
-                          [minority-index (second entry)])
-                      (= lowest-minority-index
-                         minority-index)))
-                  minority-indexes))
-     '())))
+        (map first
+             (filter (lambda [entry]
+                       (let ([coor (first entry)]
+                             [minority-index (second entry)])
+                         (= lowest-minority-index
+                            minority-index)))
+                     minority-indexes))
+        '())))
 
 ;; finds free spaces with the same distance to the given central cell
 ;; - starts finding with distance = 1
