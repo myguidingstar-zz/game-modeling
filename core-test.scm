@@ -171,15 +171,15 @@
     "find-nearby-cells test")
 
    (check-equal?
-    (most-minor-agents
+    (minor-agents
      (list
       (vector O X O O O)
       (vector O X O _ O)
       (vector O X O O O)
       (vector _ X X X X)
       (vector O O O O O)))
-    '((1 0) (1 1) (3 3) (4 3))
-    "most-minor-agents test")
+    '((1 0) (1 1) (0 2) (2 2) (1 3) (3 3) (4 3))
+    "minor-agents test")
 
    (check-equal?
     (find-free-spaces-incrementally
