@@ -27,6 +27,9 @@
  (vector O O _ _) ;   2
  (vector O X O _));   3
 
+(define (random-member coll)
+  (list-ref coll (random (length coll))))
+
 ;; looks up cell's color by coordinates
 (define (coor->color world cell-coor)
   (let ([col (first cell-coor)]
@@ -155,6 +158,7 @@
 (provide O X _
          coor->color
          symbol->color
+         random-member
          set-color!
          swap-cells!
          get-neighbors-colors
