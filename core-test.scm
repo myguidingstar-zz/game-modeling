@@ -178,7 +178,57 @@
       (vector O X O O O)
       (vector _ X X X X)
       (vector O O O O O)))
-    '((1 0) (1 1) (3 3) (4 3)))
-   "most-minor-agents test"))
+    '((1 0) (1 1) (3 3) (4 3))
+    "most-minor-agents test")
+
+   (check-equal?
+    (find-free-spaces-incrementally
+     (list
+      (vector O X _ O O)
+      (vector O X O O O)
+      (vector O X O O O)
+      (vector O X X O X)
+      (vector O O O _ _))
+     '(4 3) 3)
+    '((3 4) (4 4))
+    "find-free-spaces-incrementally test, found two at distance 1")
+
+   (check-equal?
+    (find-free-spaces-incrementally
+     (list
+      (vector O X _ O O)
+      (vector O X O O O)
+      (vector O X O O O)
+      (vector _ X X O X)
+      (vector O O O O _))
+     '(2 2) 3)
+    '((2 0) (4 4) (0 3))
+    "find-free-spaces-incrementally test, found three at distance 2")
+
+   (check-equal?
+    (find-free-spaces-incrementally
+     (list
+      (vector O X _ O O)
+      (vector O X O O O)
+      (vector O X O O O)
+      (vector O X X O X)
+      (vector O O O O X))
+     '(1 3) 3)
+    '((2 0))
+    "find-free-spaces-incrementally test, found one at distance 3")
+
+   (check-equal?
+    (find-free-spaces-incrementally
+     (list
+      (vector O X _ O O)
+      (vector O X O O O)
+      (vector O X O O O)
+      (vector O X X O X)
+      (vector O O O O X))
+     '(0 5) 3)
+    #f
+    "find-free-spaces-incrementally test, found nothing because the
+ only free space is beyond the limit distance")
+   ))
 
 (run-tests core-tests)

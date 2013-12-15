@@ -138,6 +138,19 @@
                   minority-indexes))
      '())))
 
+;; finds free spaces with the same distance to the given central cell
+;; - starts finding with distance = 1
+;; - will increase distance if no free space found inside current distance
+;; - distance is limited within a number
+;; - returns #f if no free space found inside limit distance
+(define (find-free-spaces-incrementally
+         world central-cell limit-distance)
+  (for/first ([i (in-range 1 (add1 limit-distance))]
+              #:when (< 0 (length
+                           (find-free-spaces
+                            world central-cell i))))
+             (find-free-spaces
+              world central-cell i)))
 ;; exports symbols into a module that can be reused from other files
 (provide O X _
          coor->color
@@ -151,4 +164,5 @@
          most-minor-agents
          find-nearby-cells-helper
          find-nearby-cells
-         find-free-spaces)
+         find-free-spaces
+         find-free-spaces-incrementally)
