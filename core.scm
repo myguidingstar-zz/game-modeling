@@ -140,31 +140,17 @@
     [col (in-range (vector-length (first world)))])
    (list col row)))
 
-(define (most-minor-agents world)
-  (let* ([cells (all-cells world)]
-         [minority-indexes
-          (for/list ([coor (in-list cells)]
-                     #:when
-                     (and (movable? world coor)
-                          (not (equal? _ (coor->color world coor)))))
-                    (list
-                     coor
-                     (colors->minority-index
-                      (get-neighbors-colors world coor)
-                      (coor->color world coor))))])
-    (if (= 0 (length minority-indexes))
-        '()
-        (let ([lowest-minority-index
-               (apply min (map second minority-indexes))])
-          (if (>= 0.4 lowest-minority-index)
-              (map first
-                   (filter (lambda [entry]
-                             (let ([coor (first entry)]
-                                   [minority-index (second entry)])
-                               (= lowest-minority-index
-                                  minority-index)))
-                           minority-indexes))
-              '())))))
+(define (minor-agents world)
+  (let* ([cells (all-cells world)])
+    (for/list ([coor (in-list cells)]
+               #:when
+               (let ([color (coor->color world coor)])
+                 (and (>= 0.4 (colors->minority-index
+                               (get-neighbors-colors world coor)
+                               color))
+                      (movable? world coor)
+                      (not (equal? _ color)))))
+              coor)))
 
 ;; finds free spaces with the same distance to the given central cell
 ;; - starts finding with distance = 1
@@ -189,7 +175,7 @@
 ;; Note: this function is impure because it chooses agents and
 ;; free spaces randomly if there are more than one such suitable cells
 (define (decide-cells-to-swap* world)
-  (let ([agents (most-minor-agents world)])
+  (let ([agents (minor-agents world)])
     (when (< 0 (length agents))
           (let* ([agent-to-move
                   (random-member agents)]
@@ -212,7 +198,7 @@
          colors->minority-index
          all-cells
          minor?
-         most-minor-agents
+         minor-agents
          find-nearby-cells-helper
          find-nearby-cells
          find-free-spaces
