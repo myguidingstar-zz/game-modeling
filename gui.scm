@@ -37,6 +37,13 @@
           (swap-cells! world source target)
           #t))))
 
+(define (change-world! world n-of-steps delay)
+  (for/and ([n n-of-steps])
+           (display (format "changed ~a times" n))
+           (draw-world world)
+           (sleep delay)
+           (change-world-once! world)))
+
 (new button% [parent frame]
      [label "Next 365 days"]
      ;; Callback for a button click:
