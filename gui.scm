@@ -3,11 +3,22 @@
 (require racket/gui/base
          "core.scm")
 
-(define cell-size 20)
+;; Configuration goes here
+(define cell-size 10)
 
+(define time-between-turns 0.01)
+
+(define n-of-steps-each-click 365000)
+
+(define n-of-Os 300)
+(define n-of-Xs 300)
+(define n-of-cols 30)
+(define n-of-rows 30)
+
+;; Main program
 (define frame (new frame% [label "Game modeling"]
-                   [width 300]
-                   [height 300]))
+                   [width (* cell-size n-of-cols)]
+                   [height (* cell-size n-of-rows)]))
 ; Make the drawing area
 (define canvas (new canvas% [parent frame]))
 ; Get the canvas's drawing context
@@ -39,19 +50,21 @@
 
 (define (change-world! world n-of-steps delay)
   (for/and ([n n-of-steps])
-           (display (format "changed ~a times" n))
+           (print (format "changed ~a times" n))
            (draw-world world)
            (sleep delay)
            (change-world-once! world)))
 
 (define initial-world
-  (create-world 400 400 300 300))
+  (create-world n-of-Os n-of-Xs
+                n-of-cols n-of-rows))
 
 (new button% [parent frame]
-     [label "Next 365 days"]
+     [label (format "Next ~a turns" n-of-steps-each-click)]
      ;; Callback for a button click:
      [callback (lambda (button event)
-                 (change-world! initial-world 365 1))])
+                 (change-world! initial-world
+                                n-of-steps-each-click time-between-turns))])
 
 (send frame show #t)
 (sleep/yield 1)
