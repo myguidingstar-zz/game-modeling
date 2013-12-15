@@ -120,14 +120,21 @@
   (let* ([cells (all-cells world)]
          [minority-indexes
           (map (lambda [coor]
-                 (list
-                  coor
-                  (colors->minority-index
-                   (get-neighbors-colors world coor)
-                   (coor->color world coor))))
+                 (let ([color (coor->color world coor)])
+                   (list
+                    coor
+                    (colors->minority-index
+                     (get-neighbors-colors world coor)
+                     color)
+                    color)))
                cells)]
          [lowest-minority-index
-          (apply min (map second minority-indexes))])
+          (apply min
+                 (map second
+                      (filter-not (lambda [entry]
+                                    (let ([color (third entry)])
+                                      (equal? _ color)))
+                                  minority-indexes)))])
     (map first
          (filter (lambda [entry]
                    (let ([coor (first entry)]

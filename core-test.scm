@@ -174,11 +174,11 @@
     (most-minor-cells
      (list
       (vector O X O O O)
+      (vector O X O _ O)
       (vector O X O O O)
-      (vector O X O O O)
-      (vector O X X X X)
+      (vector _ X X X X)
       (vector O O O O O)))
-    '((1 0) (1 1) (1 3) (3 3) (4 3)))
+    '((1 0) (1 1) (3 3) (4 3)))
    "most-minor-cells test"))
 
 (run-tests core-tests)
