@@ -154,6 +154,11 @@
                             world central-cell i))))
              (find-free-spaces
               world central-cell i)))
+
+;; checks if a cell has at least one free space to move to
+(define (movable? world central-cell)
+  (not (equal? #f (find-free-spaces-incrementally world central-cell 3))))
+
 ;; exports symbols into a module that can be reused from other files
 (provide O X _
          coor->color
