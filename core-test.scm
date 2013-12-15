@@ -231,42 +231,6 @@
  only free space is beyond the limit distance")
 
    (check-equal?
-    (decide-cells-to-swap*
-     (list
-      (vector O X _ O O)
-      (vector O X O O O)
-      (vector O X O O O)
-      (vector O X X O X)
-      (vector O O O O _)))
-    '((4 3) (4 4))
-    "decide-cells-to-swap* test. Sample world is chosen selectively
-so that there is only one agent and one free space for that agent")
-
-   (check-equal?
-    (decide-cells-to-swap*
-     (list
-      (vector O X O O _)
-      (vector O X O O O)
-      (vector O O O O O)
-      (vector O X O O X)
-      (vector O O O O O)))
-    '((1 3) (4 0))
-    "decide-cells-to-swap* test. Sample world is chosen selectively
-so that there is only one agent and one free space for that agent")
-
-   (check-equal?
-    (decide-cells-to-swap*
-     (list
-      (vector O O O O _)
-      (vector O O O O O)
-      (vector O O O O O)
-      (vector O O O O O)
-      (vector X O O O O)))
-    (void)
-    "decide-cells-to-swap* test. Sample world is chosen selectively
-so that there is only one agent but no free space for that agent")
-
-   (check-equal?
     (but-ref  '(0 1 2 3 4) 3)
     '(0 1 2 4)
     "check-equal? test")
