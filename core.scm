@@ -130,18 +130,20 @@
                      coor
                      (colors->minority-index
                       (get-neighbors-colors world coor)
-                      (coor->color world coor))))]
-         [lowest-minority-index
-          (apply min (map second minority-indexes))])
-    (if (>= 0.4 lowest-minority-index)
-        (map first
-             (filter (lambda [entry]
-                       (let ([coor (first entry)]
-                             [minority-index (second entry)])
-                         (= lowest-minority-index
-                            minority-index)))
-                     minority-indexes))
-        '())))
+                      (coor->color world coor))))])
+    (if (= 0 (length minority-indexes))
+        '()
+        (let ([lowest-minority-index
+               (apply min (map second minority-indexes))])
+          (if (>= 0.4 lowest-minority-index)
+              (map first
+                   (filter (lambda [entry]
+                             (let ([coor (first entry)]
+                                   [minority-index (second entry)])
+                               (= lowest-minority-index
+                                  minority-index)))
+                           minority-indexes))
+              '())))))
 
 ;; finds free spaces with the same distance to the given central cell
 ;; - starts finding with distance = 1
