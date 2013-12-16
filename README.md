@@ -1,16 +1,25 @@
 # Game modeling
 
-You need Racket scheme installed to run/develop this.
+You need [Racket](http://racket-lang.org/) installed to run/develop this.
 
 # Run unit tests
 
+[![Build Status](https://travis-ci.org/myguidingstar/game-modeling.png?branch=master)](https://travis-ci.org/myguidingstar/game-modeling)
+
 ```sh
-racket -t core-test.scm
+racket -t core-test.rkt
 ```
 
 # Run the Graphical User Interface
 
 ```sh
-racket -t gui.scm
+racket -t gui.rkt
 ```
-then press "Next 365 days" button to see the "world" changing.
+then press "Next n turns" button to see the "world" changing.
+
+# License
+Copyright (C) 2013 Hoang Minh Thang
+
+Distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
+
+See the file COPYING for more details.
