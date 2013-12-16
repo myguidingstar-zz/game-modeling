@@ -1,17 +1,17 @@
 #lang racket
 
 (require racket/gui/base
-         "core.scm")
+         "core.rkt")
 
 ;; Configuration goes here
 (define cell-size 10)
 
-(define time-between-turns 0.01)
+(define time-between-turns 0.0001)
 
-(define n-of-steps-each-click 365000)
+(define n-of-steps-each-click (* 365 1000000))
 
-(define n-of-Os 300)
-(define n-of-Xs 300)
+(define n-of-Os 250)
+(define n-of-Xs 250)
 (define n-of-cols 30)
 (define n-of-rows 30)
 

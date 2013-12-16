@@ -1,6 +1,6 @@
 #lang racket
 (require rackunit
-         "core.scm"
+         "core.rkt"
          rackunit/text-ui)
 
 (define core-tests
