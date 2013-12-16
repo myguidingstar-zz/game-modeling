@@ -29,6 +29,12 @@
   (send dc set-pen "white" 1 'solid)
   (send dc draw-rectangle (* cell-size x) (* cell-size y) cell-size cell-size))
 
+(define (update-views pairs)
+  (for ([pair pairs])
+    (let ([args (cons (symbol->color (second pair))
+                      (first pair))])
+      (apply draw-cell args))))
+
 (define (draw-world world)
   (let ([n-of-rows (length world)]
         [n-of-cols (vector-length (first world))])
