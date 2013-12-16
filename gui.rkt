@@ -27,7 +27,7 @@
 (define (draw-cell color x y)
   (send dc set-brush color 'solid)
   (send dc set-pen "white" 1 'solid)
-  (send dc draw-rectangle x y cell-size cell-size))
+  (send dc draw-rectangle (* cell-size x) (* cell-size y) cell-size cell-size))
 
 (define (draw-world world)
   (let ([n-of-rows (length world)]
@@ -36,8 +36,8 @@
            [col (in-range n-of-cols)])
           (draw-cell (symbol->color
                       (coor->color world (list col row)))
-                     (* cell-size col)
-                     (* cell-size row)))))
+                     col
+                     row))))
 
 (define (change-world-once! world)
   (let ([pair (decide-cells-to-swap* world)])
