@@ -1,7 +1,7 @@
 # Game modeling
 
 This program models how a randomly mixed population of two races will
-evolve over time if people just do not want to be surround by too much
+evolve over time if people just do not want to be surrounded by too much
 of the other race.
 
 # Requirements
