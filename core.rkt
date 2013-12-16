@@ -66,11 +66,14 @@
     (vector-set! (list-ref world row) col color)))
 
 ;; swaps two cells (swap their colours)
+;; returns a list that can be passed to update-views
 (define (swap-cells! world source target)
   (let ([source-color (coor->color world source)]
         [target-color (coor->color world target)])
     (set-color! world  source target-color)
-    (set-color! world  target source-color)))
+    (set-color! world  target source-color)
+    (list (list source target-color)
+          (list target source-color))))
 
 ;; returns list of all cells nearby the given cell with a specific distance
 ;; the nearby cells may or may not be inside world.

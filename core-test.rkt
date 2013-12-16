@@ -32,8 +32,8 @@
                   (vector _ X O X)
                   (vector O O _ _)
                   (vector O X O _))])
-      (swap-cells! world '(1 1) '(0 1))
-      world)
+      (list (swap-cells! world '(1 1) '(0 1))
+            world))
 
     ;; Input world with highlighted source and target cells:
     ;; - source cell is marked with brackets []
@@ -44,12 +44,17 @@
     ;;  (vector  O   O  _ _)
     ;;  (vector  O   X  O _))
 
-    ;; Output world
+
     (list
-     (vector O O O _)
-     (vector X _ O X)
-     (vector O O _ _)
-     (vector O X O _))
+     ;; what swap-cells! returns
+     '(((1 1) _)
+       ((0 1) X))
+     ;; Output world
+     (list
+      (vector O O O _)
+      (vector X _ O X)
+      (vector O O _ _)
+      (vector O X O _)))
     "swap-cells! tests")
    (check-equal?
     (colors->minority-index '(O O O O _ O O _) X)
