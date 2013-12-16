@@ -51,13 +51,12 @@
         #f
         (let* ([source (first pair)]
                [target (second pair)])
-          (swap-cells! world source target)
+          (update-views (swap-cells! world source target))
           #t))))
 
 (define (change-world! world n-of-steps delay)
   (for/and ([n n-of-steps])
-           (print (format "changed ~a times" n))
-           (draw-world world)
+           (printf (format "changed ~a times\n" n))
            (sleep delay)
            (change-world-once! world)))
 
@@ -74,3 +73,4 @@
 
 (send frame show #t)
 (sleep/yield 1)
+(draw-world initial-world)
