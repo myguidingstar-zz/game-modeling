@@ -165,12 +165,11 @@
 ;; - returns #f if no free space found inside limit distance
 (define (find-free-spaces-incrementally
          world central-cell limit-distance)
-  (for/first ([i (in-range 1 (add1 limit-distance))]
-              #:when (< 0 (length
-                           (find-free-spaces
-                            world central-cell i))))
-             (find-free-spaces
-              world central-cell i)))
+  (for*/first ([i (in-range 1 (add1 limit-distance))]
+               [free-spaces (in-value (find-free-spaces
+                                       world central-cell i))]
+               #:when (< 0 (length free-spaces)))
+    free-spaces))
 
 ;; checks if a cell has at least one free space to move to
 (define (movable? world central-cell)
