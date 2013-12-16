@@ -8,6 +8,8 @@
 (define X 'X)
 (define _ '_)
 
+(define minority-threshold 0.4)
+
 (define (but-ref coll index)
   (append (take coll index)
           (drop coll (add1 index))))
@@ -132,7 +134,7 @@
 ;; returns true if the cell is minor
 (define (minor? neighbors-colors cell-color)
   (< (colors->minority-index neighbors-colors cell-color)
-     0.4))
+     minority-threshold))
 
 (define (all-cells world)
   (for*/list
@@ -145,12 +147,13 @@
     (for/list ([coor (in-list cells)]
                #:when
                (let ([color (coor->color world coor)])
-                 (and (>= 0.4 (colors->minority-index
-                               (get-neighbors-colors world coor)
-                               color))
+                 (and (>= minority-threshold
+                          (colors->minority-index
+                           (get-neighbors-colors world coor)
+                           color))
                       (movable? world coor)
                       (not (equal? _ color)))))
-              coor)))
+      coor)))
 
 ;; finds free spaces with the same distance to the given central cell
 ;; - starts finding with distance = 1
